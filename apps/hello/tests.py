@@ -10,14 +10,14 @@ class HttpTest(TestCase):
 
     def test_home(self):
         response = self.client.get(reverse('hello.views.index'))
-        self.assertContains(response, self.me.name)
-        self.assertContains(response, self.me.last_name)
+        self.assertContains(response, self.person.name)
+        self.assertContains(response, self.person.last_name)
         self.assertContains(response,
-            self.me.date_of_birth.strftime('%B %d, %Y'))
-        for string in self.me.bio.splitlines():
+            self.person.date_of_birth.strftime('%B %d, %Y'))
+        for string in self.person.bio.splitlines():
             self.assertContains(response, string)
-        self.assertContains(response, self.me.email)
-        self.assertContains(response, self.me.jabber)
-        self.assertContains(response, self.me.skype)
-        for string in self.me.other_contacts.splitlines():
+        self.assertContains(response, self.person.email)
+        self.assertContains(response, self.person.jabber)
+        self.assertContains(response, self.person.skype)
+        for string in self.person.other_contacts.splitlines():
             self.assertContains(response, string)

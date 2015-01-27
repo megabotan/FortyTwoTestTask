@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render_to_response
 
-# Create your views here.
+from models import Person
+
+
+def index(request):
+    person = Person.objects.all()[0]
+    return render_to_response('index.html', {'person':person})

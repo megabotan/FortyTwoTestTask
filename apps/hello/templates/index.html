@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="content">
+		<div class="left_col">
+			<p>{{person.name}}</p>
+			<p>{{person.last_name}}</p>
+			<p>{{person.date_of_birth}}</p>
+		</div>
+		<div class="right_col">
+			<p>Contacts:</p>
+			<p>Email:{{person.email}}</p>
+			<p>Jabber:{{person.jabber}}</p>
+			<p>Skype:{{person.skype}}</p>
+		</div>
+		<div class="left_col">
+			<p>Bio:<p>
+			<p>{{person.bio|linebreaks}}</p>
+		</div>
+		<div class="right_col">
+			<p>Other contacts:</p>
+			<p>{{person.other_contacts|linebreaks}}</p>
+		</div>
+	</div>
+{% endblock content %}

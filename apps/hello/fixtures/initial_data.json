@@ -3,10 +3,10 @@
     "pk": 1, 
     "model": "hello.person", 
     "fields": {
-        "bio": "23 years old, using python for last two years.", 
+        "bio": "23 years old, using python for last two years.\r\nlalala\r\nlalala", 
         "last_name": "Kovalenko", 
         "name": "Andrew", 
-        "other_contacts": "Phone: +38 068 476 17 74\r\n", 
+        "other_contacts": "Phone: +38 068 476 17 74\r\nlalala\r\nlalala", 
         "date_of_birth": "1991-06-26", 
         "skype": "kovalsmall", 
         "jabber": "megabotan@jabber.ru", 
