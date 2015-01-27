@@ -1,0 +1,34 @@
+[
+{
+    "pk": 1, 
+    "model": "hello.person", 
+    "fields": {
+        "bio": "23 years old, using python for last two years.", 
+        "last_name": "Kovalenko", 
+        "name": "Andrew", 
+        "other_contacts": "Phone: +38 068 476 17 74\r\n", 
+        "date_of_birth": "1991-06-26", 
+        "skype": "kovalsmall", 
+        "jabber": "megabotan@jabber.ru", 
+        "email": "adrekoval@gmail.com"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2015-01-27T14:13:15.887Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$0yhkCxSACt4o$h7c3CYWe7Rv7GuOiR2mKQxZhCp6EvLrJVaDN0fUTPko=", 
+        "email": "", 
+        "date_joined": "2015-01-27T14:09:36.075Z"
+    }
+}
+]
