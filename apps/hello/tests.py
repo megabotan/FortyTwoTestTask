@@ -33,3 +33,9 @@ class HttpTest(TestCase):
             self.assertContains(response, url)
         self.assertNotContains(response, urls[-1])
 
+
+class ContextTest(TestCase):
+    def test_template_context_processor(self):
+        response = self.client.get('/almost_random_string')
+        self.assertTrue('settings' in response.context)
+        self.assertEquals(response.context['settings'], settings)
