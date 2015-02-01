@@ -39,13 +39,13 @@ class HttpTest(TestCase):
 
     def test_edit_page(self):
         response = self.client.get(reverse('hello.views.edit'))
-        self.assertRedirects(response, '/login/')
-        self.assertTrue(c.login(username='admin', password='admin'))
+        self.assertRedirects(response, settings.LOGIN_URL + '?next=' + reverse('hello.views.edit'))
+        self.assertTrue(self.client.login(username='admin', password='admin'))
         response = self.client.get(reverse('hello.views.edit'))
         self.assertTemplateUsed(response, 'edit.html')
         new_data = {'name': 'John',
                     'last_name': 'Smith',
-                    'date_of_birth': datetime.datetime.now(),
+                    'date_of_birth': datetime.date.today(),
                     'bio': 'test bio',
                     'email': 'email@email.com',
                     'jabber': 'jabber@jabber.com',
@@ -54,8 +54,9 @@ class HttpTest(TestCase):
                     }
         self.client.post(reverse('hello.views.edit'), new_data)
         response = self.client.get(reverse('hello.views.index'))
-        for value in new_data.itervalues():
-            assertContains(response, value)
+        for key, value in new_data.iteritems():
+            if key != 'date_of_birth':
+                self.assertContains(response, value)
 
 
 class ContextTest(TestCase):

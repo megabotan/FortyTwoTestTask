@@ -141,3 +141,7 @@ TEMPLATE_DIRS = (
 SOUTH_TESTS_MIGRATE = False
 
 REQUESTS_ON_PAGE = 10
+
+LOGIN_URL = '/login/'
+
+LOGOUT_URL = '/logout/'

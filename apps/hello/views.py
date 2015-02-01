@@ -1,7 +1,11 @@
-from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 from models import Person, Request
+from forms import PersonForm
 
 
 def index(request):
@@ -13,3 +17,20 @@ def requests(request):
     count = settings.REQUESTS_ON_PAGE
     requests = Request.objects.all().order_by('date')[:count]
     return render_to_response('requests.html', {'requests': requests})
+
+
+@login_required
+def edit(request):
+    person = get_object_or_404(Person)
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            form = PersonForm(request.POST, instance=person)
+            form.save()
+            return HttpResponseRedirect(reverse('hello.views.index'))
+    else:
+        form = PersonForm(instance=person)
+    return render(request, 'edit.html', {
+        'form': form,
+        'person': person
+    })
