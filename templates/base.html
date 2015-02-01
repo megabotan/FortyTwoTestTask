@@ -10,7 +10,18 @@
 <body>
     {% block body %}
         <div class="header">
+        	<div class="left_col">
                 <h2>42 Coffee Cups Test Assignment</h2>
+        	</div>
+		    <div class="right_col">
+		        <div class="auth">
+		            {% if user.is_authenticated %}
+		                <p>Logged in as: {{user}} <a href="/logout/?next=/">Logout</a></p>
+		            {% else %}
+		                <p><a href="/login/?next=/">Login</a></p>
+		            {% endif %}
+		        </div>
+		    </div>
         </div>
         {% block content %}
         {% endblock content %}

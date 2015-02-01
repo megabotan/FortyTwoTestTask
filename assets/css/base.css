@@ -1,3 +1,7 @@
+div.content{
+	display: inline-block;
+	min-width: 800px;
+}
 div.left_col{
 	margin-left: 4%;
 	float: left;
@@ -8,4 +12,25 @@ div.right_col{
 	margin-left: 52%;
 	width: 44%;
     padding: 5px;
+}
+div.top_half{
+    min-height: 200px;
+    overflow: auto;
+}
+div.bot_half{
+    min-height: 200px;
+    overflow: auto;
+}
+div.fieldWrapper
+{
+    margin-top: 10px;
+    position: relative;
+}
+div.fieldWrapper input{
+    position: absolute;
+    left: 100px;
+}
+#id_photo {
+    position:relative;
+    left: 10px;
 }
