@@ -1,9 +1,12 @@
 import datetime
+import os
+from PIL import Image
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.test.client import Client
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 from hello.models import Person
 
@@ -39,10 +42,14 @@ class HttpTest(TestCase):
 
     def test_edit_page(self):
         response = self.client.get(reverse('hello.views.edit'))
-        self.assertRedirects(response, settings.LOGIN_URL + '?next=' + reverse('hello.views.edit'))
+        self.assertRedirects(response, settings.LOGIN_URL +
+                             '?next=' + reverse('hello.views.edit'))
         self.assertTrue(self.client.login(username='admin', password='admin'))
         response = self.client.get(reverse('hello.views.edit'))
         self.assertTemplateUsed(response, 'edit.html')
+        test_dir_path = os.path.dirname(os.path.realpath(__file__))
+        photo_file = open(os.path.join(test_dir_path, 'test_image.jpg'), 'rb')
+        photo = SimpleUploadedFile(photo_file.name, photo_file.read())
         new_data = {'name': 'John',
                     'last_name': 'Smith',
                     'date_of_birth': datetime.date.today(),
@@ -51,12 +58,17 @@ class HttpTest(TestCase):
                     'jabber': 'jabber@jabber.com',
                     'skype': 'test_skype',
                     'other_contacts': 'test other_contacts',
+                    'photo': photo,
                     }
-        self.client.post(reverse('hello.views.edit'), new_data)
+        self.client.post(reverse('hello.views.edit'), new_data, format='multipart')
         response = self.client.get(reverse('hello.views.index'))
         for key, value in new_data.iteritems():
-            if key != 'date_of_birth':
+            if not key in ['date_of_birth', 'photo']:
                 self.assertContains(response, value)
+        p = Person.objects.all()[0]
+        saved_image = p.photo.path
+        width, height = Image.open(saved_image).size
+        self.assertEquals((width, height), settings.PHOTO_SIZE)
 
 
 class ContextTest(TestCase):

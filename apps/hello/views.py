@@ -23,9 +23,9 @@ def requests(request):
 def edit(request):
     person = get_object_or_404(Person)
     if request.method == 'POST':
-        form = PersonForm(request.POST)
+        form = PersonForm(request.POST, request.FILES)
         if form.is_valid():
-            form = PersonForm(request.POST, instance=person)
+            form = PersonForm(request.POST, request.FILES, instance=person)
             form.save()
             return HttpResponseRedirect(reverse('hello.views.index'))
     else:

@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from django.conf import settings
 
 
 urlpatterns = patterns('',
@@ -8,3 +9,8 @@ urlpatterns = patterns('',
         {'template_name': 'login.html'}, name='login'),
     url(r'^edit/$', 'hello.views.edit', name='edit'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))
