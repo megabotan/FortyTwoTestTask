@@ -1,12 +1,16 @@
+import datetime
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.test.client import Client
 
 from hello.models import Person
 
 
 class HttpTest(TestCase):
     def setUp(self):
+        self.client = Client()
         self.person = Person.objects.all()[0]
 
     def test_home(self):
@@ -32,6 +36,26 @@ class HttpTest(TestCase):
         for url in urls[:-1]:
             self.assertContains(response, url)
         self.assertNotContains(response, urls[-1])
+
+    def test_edit_page(self):
+        response = self.client.get(reverse('hello.views.edit'))
+        self.assertRedirects(response, '/login/')
+        self.assertTrue(c.login(username='admin', password='admin'))
+        response = self.client.get(reverse('hello.views.edit'))
+        self.assertTemplateUsed(response, 'edit.html')
+        new_data = {'name': 'John',
+                    'last_name': 'Smith',
+                    'date_of_birth': datetime.datetime.now(),
+                    'bio': 'test bio',
+                    'email': 'email@email.com',
+                    'jabber': 'jabber@jabber.com',
+                    'skype': 'test_skype',
+                    'other_contacts': 'test other_contacts',
+                    }
+        self.client.post(reverse('hello.views.edit'), new_data)
+        response = self.client.get(reverse('hello.views.index'))
+        for value in new_data.itervalues():
+            assertContains(response, value)
 
 
 class ContextTest(TestCase):
