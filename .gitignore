@@ -15,4 +15,4 @@ media
 static
 *.dat
 .env/
-.uploads/
+.uploads/images/

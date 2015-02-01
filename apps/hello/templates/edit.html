@@ -1,14 +1,74 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<form enctype="multipart/form-data" action="/edit/" method="post">{% csrf_token %}
-    {{ form.non_field_errors }}
-	{{form.as_p}}
-
-     <input type="submit" value="Save" />
-     <a href="/">Cancel</a>
+    <form enctype="multipart/form-data" action="/edit/" method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
+    <div class="content">
+    
+        <div class="left_col">
+         
+            <div class="fieldWrapper">
+                {{ form.name.errors }}
+                <label for="id_name">Name:</label>
+                {{ form.name }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.last_name.errors }}
+                <label for="id_last_name">Last_name:</label>
+                {{ form.last_name }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.date_of_birth.errors }}
+                <label for="id_date_of_birth">Date of birth:</label>
+                {{ form.date_of_birth }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.photo.errors }}
+                <label for="id_photo"><p>Photo:</p></label>
+                {% if form.instance.photo %}
+                	<img src="{{ form.instance.photo.url }}" />
+                {% endif %}
+                <br/>
+                {{ form.photo }}
+                
+            </div>     
+        </div>
+        
+        <div class="right_col">
+        
+            
+            <div class="fieldWrapper">
+                {{ form.email.errors }}
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.jabber.errors }}
+                <label for="id_jabber">Jabber:</label>
+                {{ form.jabber }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.skype.errors }}
+                <label for="id_skype">Skype:</label>
+                {{ form.skype }}
+            </div>    
+            <div class="fieldWrapper">
+                {{ form.other_contacts.errors }}
+                <label for="id_other_contacts">Other contacts:</label>
+                {{ form.other_contacts }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.bio.errors }}
+                <label for="id_bio">Bio:</label>
+                {{ form.bio }}
+            </div>
+        </div>
+        
+    </div>
+    <br/>
+    <input type="submit" value="Save" />
+     	<a href="/">Cancel</a>
     </form>
-
 
     <div class="footer">	
         <hr>

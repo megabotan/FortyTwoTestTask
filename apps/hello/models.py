@@ -12,7 +12,10 @@ class Person(models.Model):
     jabber = models.CharField(max_length=200)
     skype = models.CharField(max_length=200)
     other_contacts = models.TextField()
-    photo = models.ImageField(upload_to='images', null=True)
+    photo = models.ImageField(
+        upload_to='images',
+        default='default.jpg',
+        null=True)
 
     def save(self):
         if not self.photo:
