@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if requests %}
+		<div>
+        <table class="requests">
+                <tr>
+                    <th>Url</th>
+                    <th>Method</th>
+                    <th>Date</th>
+                </tr>
+            {% for request in requests %}
+                <tr>
+                    <td><a href="{{request.url}}">{{request.url}}</td>
+                    <td>{{request.method}}</td>
+                    <td>{{request.date}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+	</div>
+	{% else %}
+		<p>There are no requests. Something went wrong...</p>
+	{% endif %}
+{% endblock content %}
