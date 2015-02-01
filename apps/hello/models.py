@@ -10,3 +10,8 @@ class Person(models.Model):
     jabber = models.CharField(max_length=200)
     skype = models.CharField(max_length=200)
     other_contacts = models.TextField()
+
+class Request(models.Model):
+    url = models.CharField(max_length=200)
+    method = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now_add=True)

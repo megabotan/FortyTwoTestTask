@@ -52,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'hello.middleware.RequestMiddleware',
 )
 
 ROOT_URLCONF = 'fortytwo_test_task.urls'
@@ -127,3 +128,5 @@ TEMPLATE_DIRS = (
 
 # Turn off south during test
 SOUTH_TESTS_MIGRATE = False
+
+REQUESTS_ON_PAGE = 10

@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from hello.models import Person
 
@@ -21,3 +22,14 @@ class HttpTest(TestCase):
         self.assertContains(response, self.person.skype)
         for string in self.person.other_contacts.splitlines():
             self.assertContains(response, string)
+
+    def test_requests(self):
+        urls = ['/almost_random_string_{0}'.format(i)
+                for i in range(settings.REQUESTS_ON_PAGE + 1)]
+        for url in urls:
+            response = self.client.get(url)
+        response = self.client.get(reverse('hello.views.requests'))
+        for url in urls[:-1]:
+            self.assertContains(response, url)
+        self.assertNotContains(response, urls[-1])
+
